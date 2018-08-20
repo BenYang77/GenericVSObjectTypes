@@ -4,19 +4,18 @@
 using System;
 namespace GenericStack
 {
-  public class Stack
+    public class Stack<T>
     {
         readonly int m_Size;
         int m_StackPointer = 0;
-        object[] m_Items;
-        public Stack() : this(100)
-        { }
+        T[] m_Items;
+        public Stack() : this(100){}
         public Stack(int size)
         {
             m_Size = size;
-            m_Items = new object[m_Size];
+            m_Items = new T[m_Size];
         }
-        public void Push(object item)
+        public void Push(T item)
         {
             if (m_StackPointer >= m_Size)
                 throw new StackOverflowException();
@@ -24,7 +23,7 @@ namespace GenericStack
             m_Items[m_StackPointer] = item;
             m_StackPointer++;
         }
-        public object Pop()
+        public T Pop()
         {
             m_StackPointer--;
             if (m_StackPointer >= 0)
