@@ -12,6 +12,7 @@ namespace GenericVSObjectTypes
         protected void Page_Load(object sender, EventArgs e)
         {
             Response.Write("View GitUpResult");
+            Response.Write("View GitUpResult");
         }
     }
 }
