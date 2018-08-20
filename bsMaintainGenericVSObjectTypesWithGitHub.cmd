@@ -1,18 +1,17 @@
 :: https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
 @Echo OFF&Cls
 Call :getToday
-Set CurProjPath=R:\Infomation\CodeCenter\GenericVSObjectTypes\
+Set CurProjPath=D:\BenYang\PracticeArea\GenericVSObjectTypes\GenericVSObjectTypes\
 Set originPath=https://github.com/BenYang77/GenericVSObjectTypes.git
 
 Call :getCurCmdFilePath %CurProjPath%
 %filedrive%&ECHO ProjectLocation  %filedrive:~0,2%%filepath%&CD %filepath%
 
 Set Branch=master
-CHOICE /C 123 /N /M "Please select branch 1:master 2:bugfix 3:pull-request-demo 4:cancel"
+CHOICE /C 123 /N /M "Please select branch 1:master 2:UAT 3:cancel"
 Set ErrLev=%errorlevel%
 IF %ErrLev%==1 (Set Branch=master&GOTO NextLevel)
-IF %ErrLev%==2 (Set Branch=bugfix&GOTO NextLevel)
-IF %ErrLev%==3 (Set Branch=pull-request-demo&GOTO NextLevel)
+IF %ErrLev%==2 (Set Branch=UAT&GOTO NextLevel)
 GOTO Info00
 
 :NextLevel
