@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,78 @@ namespace GenericVSObjectTypes
         {
             Response.Write("View GitUpResult");
             Response.Write("View GitUpResult");
+            //Dbg_extensions.dump(object, )
+            Dbg_extensions.dump(1, 2, 3);
+
+            Item item = new Item
+            {
+                Name = "Chocolate",
+                Number = 12345,
+                CreatedDate = DateTime.Now,
+                Price = 36.7M,
+                Category = new Category(1, "Sweets")
+            };
+            ObjectHelper.Dump(item);
+        }
+    }
+
+    internal class Item
+    {
+        public string Name { get; set; }
+        public int Number { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public decimal Price { get; set; }
+        public Category Category { get; set; }
+    }
+
+    public class Category
+    {
+        public int v1 { get; set; }
+        public string v2 { get; set; }
+
+        public Category(int v1, string v2)
+        {
+            this.v1 = v1;
+            this.v2 = v2;
+        }
+
+        public Category() { }
+    }
+
+    #region Dbg_extensions 
+    public static class Dbg_extensions
+    {
+        static public T dump<T>(this T @object, params object[] args)
+        {
+            dbg.print(@object, args);
+            return @object;
+        }
+
+        static public T print<T>(this T @object, params object[] args)
+        {
+            dbg.print(@object, args);
+            return @object;
+        }
+    }
+    partial class dbg
+    {
+        public static bool publicOnly = true;
+        public static bool propsOnly = false;
+        public static int max_items = 25;
+        public static int depth = 1;
+        public static void printf(string format, params object[] args) { }
+        public static void print(object @object, params object[] args) { }
+    }
+
+    #endregion
+
+    static class ObjectHelper
+    {
+        public static void Dump<T>(this T x)
+        {
+            string json = JsonConvert.SerializeObject(x, Formatting.Indented);
+            HttpContext.Current.Response.Write(json);
         }
     }
 }
+

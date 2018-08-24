@@ -1,5 +1,4 @@
-
-//Questions? Comments? go to 
+//Questions? Comments? go to
 //http://www.idesign.net
 
 using System;
@@ -11,8 +10,7 @@ namespace ObjectStack
         readonly int m_Size;
         int m_StackPointer = 0;
         object[] m_Items;
-        public Stack() : this(100)
-        { }
+        public Stack() : this(100) { }
         public Stack(int size)
         {
             m_Size = size;
@@ -41,4 +39,3 @@ namespace ObjectStack
         }
     }
 }
-
