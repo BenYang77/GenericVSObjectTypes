@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Xml.Serialization;
 
 namespace GenericVSObjectTypes
 {
@@ -26,10 +25,24 @@ namespace GenericVSObjectTypes
                 Category = new Category(1, "Sweets")
             };
             ObjectHelper.Dump(item);
+            DumpAsXml(item);
+        }
+
+        private static void DumpAsXml(object o)
+        {
+            //var stringBuilder = new StringBuilder();
+            //XmlSerializer xser = new XmlSerializer(typeof(MyType));
+            //var serializer = new XmlSerializer();
+            XmlSerializer ser = new XmlSerializer(typeof(Item));
+            //serializer.Serialize(new System.CodeDom.Compiler.IndentedTextWriter(new System.IO.StringWriter(stringBuilder)), o);
+            //Console.WriteLine(stringBuilder);
+            TextWriter writer = new StreamWriter("D:/a.xml");
+            ser.Serialize(writer, o);
+            writer.Close();
         }
     }
 
-    internal class Item
+    public class Item
     {
         public string Name { get; set; }
         public int Number { get; set; }
@@ -49,10 +62,13 @@ namespace GenericVSObjectTypes
             this.v2 = v2;
         }
 
-        public Category() { }
+        public Category()
+        {
+        }
     }
 
-    #region Dbg_extensions 
+    #region Dbg_extensions
+
     public static class Dbg_extensions
     {
         static public T dump<T>(this T @object, params object[] args)
@@ -67,19 +83,26 @@ namespace GenericVSObjectTypes
             return @object;
         }
     }
+
     partial class dbg
     {
         public static bool publicOnly = true;
         public static bool propsOnly = false;
         public static int max_items = 25;
         public static int depth = 1;
-        public static void printf(string format, params object[] args) { }
-        public static void print(object @object, params object[] args) { }
+
+        public static void printf(string format, params object[] args)
+        {
+        }
+
+        public static void print(object @object, params object[] args)
+        {
+        }
     }
 
-    #endregion
+    #endregion Dbg_extensions
 
-    static class ObjectHelper
+    internal static class ObjectHelper
     {
         public static void Dump<T>(this T x)
         {
@@ -88,4 +111,3 @@ namespace GenericVSObjectTypes
         }
     }
 }
-
