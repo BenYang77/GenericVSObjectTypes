@@ -11,8 +11,6 @@ namespace GenericVSObjectTypes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write("View GitUpResult");
-            Response.Write("View GitUpResult");
             //Dbg_extensions.dump(object, )
             Dbg_extensions.dump(1, 2, 3);
 
