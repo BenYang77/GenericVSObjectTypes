@@ -11,8 +11,6 @@ namespace GenericVSObjectTypes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write("View GitUpResult");
-            Response.Write("View GitUpResult");
             //Dbg_extensions.dump(object, )
             Dbg_extensions.dump(1, 2, 3);
 
@@ -62,7 +60,9 @@ namespace GenericVSObjectTypes
             this.v2 = v2;
         }
 
-        public Category() { }
+        public Category()
+        {
+        }
     }
 
     #region Dbg_extensions
