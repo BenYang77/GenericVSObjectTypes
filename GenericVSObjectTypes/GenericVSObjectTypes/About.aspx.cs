@@ -67,6 +67,9 @@ namespace GenericVSObjectTypes
 
     #region Dbg_extensions
 
+    /// <summary>
+    /// Dbg_extensions
+    /// </summary>
     public static class Dbg_extensions
     {
         static public T dump<T>(this T @object, params object[] args)
